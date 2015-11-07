@@ -15,9 +15,9 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 /**
- * <b>Problem description:</b> From a given file.<br />
- * 1. List down all the words and number of their occurrences.<br />
- * 2. List the top most repeated words upto given limit.<br />
+ * <b>Problem description:</b> From a given file.<br>
+ * 1. List down all the words and number of their occurrences.<br>
+ * 2. List the top most repeated words upto given limit.<br>
  * 2.a. If two words have same number of occurrences, arrange in word sorting order
  * 
  * @author Paramesh
@@ -77,7 +77,7 @@ public class FindMaxOccWordsFromFile {
 	 *            = How many top elements you want to print? If n=1 it will
 	 *            print highest occurrence word. If n=2 it will print top 2
 	 *            highest occurrence words.
-	 * @returns list of String
+	 * @return list of Strings
 	 */
 	public static List<String> filterMaxOccurance(Map<String, Integer> map, int noOfTopElements) {
 		

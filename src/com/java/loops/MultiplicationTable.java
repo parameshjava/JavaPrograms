@@ -1,15 +1,15 @@
 package com.java.loops;
 
 /**
- * Prints the multiplication table up to the required number, in the below format.<br />
+ * Prints the multiplication table up to the required number, in the below format.<br>
  * 
- *  * |  1  2  3  4  5<br />
- * --------------------<br />
- *  1 |  1  2  3  4  5<br />
- *  2 |  2  4  6  8 10<br />
- *  3 |  3  6  9 12 15<br />
- *  4 |  4  8 12 16 20<br />
- *  5 |  5 10 15 20 25<br />
+ *  * |  1  2  3  4  5<br>
+ * --------------------<br>
+ *  1 |  1  2  3  4  5<br>
+ *  2 |  2  4  6  8 10<br>
+ *  3 |  3  6  9 12 15<br>
+ *  4 |  4  8 12 16 20<br>
+ *  5 |  5 10 15 20 25<br>
  * 
  * @author Paramesh
  *

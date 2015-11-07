@@ -33,7 +33,7 @@ public class InvalidCredentialsException extends RuntimeException {
 
 	/**
 	 * To throw user defined exception along with brief description and actual
-	 * root cause of the exception. <br />
+	 * root cause of the exception. <br>
 	 * Here, Throwable object helps the programmer to know actual cause of exception.
 	 * 
 	 * @param message
