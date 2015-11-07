@@ -3,13 +3,13 @@ package com.java.loops;
 /**
  * Prints the multiplication table up to the required number, in the below format.<br />
  * 
- *  * |  1  2  3  4  5
- * --------------------
- *  1 |  0  1  2  3  4
- *  2 |  0  2  4  6  8
- *  3 |  0  3  6  9 12
- *  4 |  0  4  8 12 16
- *  5 |  0  5 10 15 20
+ *  * |  1  2  3  4  5<br />
+ * --------------------<br />
+ *  1 |  1  2  3  4  5<br />
+ *  2 |  2  4  6  8 10<br />
+ *  3 |  3  6  9 12 15<br />
+ *  4 |  4  8 12 16 20<br />
+ *  5 |  5 10 15 20 25<br />
  * 
  * @author Paramesh
  *
