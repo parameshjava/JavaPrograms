@@ -1,16 +1,16 @@
 package com.java.exceptions;
 
 /**
- * This class demonstrate how to perform user defined exception handling <br />
- * <b>Problem description:</b> Throw Module specific exception i.e., {@link InvalidCredentialsException} to identify quickly related to Login functionality errors.<br />
- * This user defined exception should match with the following criteria.<br />
- * 1. When user key in bank in username field:<br />&nbsp;&nbsp;
- * Throw exception along with the message to convey as username should not be blank.<br />
- * 2. When user key in bank in password field:<br />&nbsp;&nbsp;
- * Throw exception along with the message to convey as password should not be blank.<br />
- * 3. When user key in non numeric string in username field:<br />&nbsp;&nbsp;
- * Throw exception along with the actual root cause {@link NumberFormatException}.<br />
- * 4. When user name and password not matched with the criteria:<br />&nbsp;&nbsp;
+ * This class demonstrate how to perform user defined exception handling <br>
+ * <b>Problem description:</b> Throw Module specific exception i.e., {@link InvalidCredentialsException} to identify quickly related to Login functionality errors.<br>
+ * This user defined exception should match with the following criteria.<br>
+ * 1. When user key in bank in username field:<br>&nbsp;&nbsp;
+ * Throw exception along with the message to convey as username should not be blank.<br>
+ * 2. When user key in bank in password field:<br>&nbsp;&nbsp;
+ * Throw exception along with the message to convey as password should not be blank.<br>
+ * 3. When user key in non numeric string in username field:<br>&nbsp;&nbsp;
+ * Throw exception along with the actual root cause {@link NumberFormatException}.<br>
+ * 4. When user name and password not matched with the criteria:<br>&nbsp;&nbsp;
  * Throw exception along with the message to convey as username and password are incorrect.
  * 
  * @author Paramesh
