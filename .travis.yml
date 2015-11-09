@@ -5,7 +5,36 @@ jdk:
 env:
   global:
   - GH_REF: git@github.com:parameshjava/JavaPrograms.git
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+  - secure: "PEqsUaaj6mnT7nDnia76HFN1GizlCChF5ELyQrb19fFlA0mfcQoNnBK3PpeAch3X6u8C2npQ1/qYM+d3uh3z/kEpr4yDizktc5KEF92ucyaX/uTRRR/+FojPrd266AbqvbgsUSiBQSCodzt6u9PMKTasKo12bNCBtE/7CrFwX4nsYcC144Y3PQ/oDpRarl+Us6NMFknfrqCcHiraHhpvx7VtJoRTtvgYDY04meOw/fsRrpiqFFqPKlRxoTFVBhkPV4nVVDr+25lFPHIOKcAeFXNmzdmbgQu9GAoy5pcYLKOWUzSDAExtlUdOZ5DYL/C0FBccBz637tZEkLeTrkGeLNVWVetJB7FuImyREpGgEP+vSDvTyvDVMA0e6MOTtJzeSaSmMFysPr/Mo9SaiTpveYctBphpseD5+AxeSvbH5tijGT2OAg4krZdT6fk9s/P1GXvp/k7IUo4/pQRau/e1sBhIv3WtYkVcSeBYTYJp+FnsX1nNZikLaRrBKP9d9meWRJcKveNx73RpeSnO0uHT1C8n0tzSjGj+3ys+wPEEGzOl+P2cjVKUcAQ92opx3zC1tXcd33I88GwBFnMXu9BJ9N0NUq5uf2iwq8rv2cYdW0yvMAgnH7D23ZI/AJgNXRisAt6w1A48B8usxmKCnihoJbm1UNw1IlPF7EuVFq8VpxI="
 
+addons:
+  coverity_scan:
+
+    # GitHub project metadata
+    # ** specific to your project **
+    project:
+      name: parameshjava/JavaPrograms
+      description: "Build submitted via Travis CI"
+
+    # Where email notification of build analysis results will be sent
+    notification_email: paramesh.java5@gmail.com
+
+    # Commands to prepare for build_command
+    # ** likely specific to your build **
+    build_command_prepend: "./configure"
+
+    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
+    # ** likely specific to your build **
+    build_command: "make -j2"
+
+    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
+    # Take care in resource usage, and consider the build frequency allowances per
+    #   https://scan.coverity.com/faq#frequency
+    branch_pattern: master
+    
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
