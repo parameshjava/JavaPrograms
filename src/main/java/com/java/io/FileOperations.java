@@ -18,16 +18,19 @@ import java.util.Set;
  * <b>Problem description:</b> From a given file.<br>
  * 1. List down all the words and number of their occurrences.<br>
  * 2. List the top most repeated words upto given limit.<br>
- * 2.a. If two words have same number of occurrences, arrange in word sorting order
+ * 2.a. If two words have same number of occurrences, arrange in word sorting
+ * order
  * 
  * @author Paramesh
  *
  */
-public class FindMaxOccWordsFromFile {
+public class FileOperations {
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		
-		File file = new File("src/resources/test_file.txt").getAbsoluteFile();
+	public static Map<String, Integer> listWordsWithOccurance(String filePath)
+			throws FileNotFoundException, IOException {
+
+		File file = new File(filePath);
+		// .getAbsoluteFile();
 		BufferedReader bufferedReader = null;
 		bufferedReader = new BufferedReader(new FileReader(file));
 		String inputLine = null;
@@ -51,23 +54,12 @@ public class FindMaxOccWordsFromFile {
 					}
 				}
 			}
-			Set<Map.Entry<String, Integer>> entrySet = wordsMap.entrySet();
-			System.out.println("Words" + "\t\t" + "# of Occurances");
-			for (Map.Entry<String, Integer> entry : entrySet) {
-				System.out.println(entry.getKey() + "\t\t" + entry.getValue());
-			}
-			List<String> myTopOccurrence = filterMaxOccurance(wordsMap, 1);
-			System.out.println("\nMaixmum Occurance of Word in file: ");
-			for (String result : myTopOccurrence) {
-				System.out.println("==> " + result);
-			}
-		}
-
-		catch (IOException error) {
+		} catch (IOException error) {
 			System.out.println("Invalid File");
 		} finally {
 			bufferedReader.close();
 		}
+		return wordsMap;
 	}
 
 	/**
@@ -80,7 +72,7 @@ public class FindMaxOccWordsFromFile {
 	 * @return list of Strings
 	 */
 	public static List<String> filterMaxOccurance(Map<String, Integer> map, int noOfTopElements) {
-		
+
 		List<Entry<String, Integer>> entryList = new ArrayList<>();
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
 			entryList.add(entry);
@@ -91,12 +83,13 @@ public class FindMaxOccWordsFromFile {
 			@Override
 			public int compare(Entry<String, Integer> entry1, Entry<String, Integer> entry2) {
 				// For ascending order
-				// int compare = Integer.compare(entry1.getValue(), entry2.getValue());
+				// int compare = Integer.compare(entry1.getValue(),
+				// entry2.getValue());
 				// For descending order
 				int compare = Integer.compare(entry2.getValue(), entry1.getValue());
 				return compare != 0 ? compare : entry1.getKey().compareTo(entry2.getKey());
 			}
-			
+
 		});
 
 		List<String> list = new ArrayList<>();
@@ -104,5 +97,22 @@ public class FindMaxOccWordsFromFile {
 			list.add(entry.getKey() + " : " + entry.getValue());
 		}
 		return list;
+	}
+
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		File file = new File("src/main/resources/test_file.txt").getAbsoluteFile();
+		
+		Map<String, Integer> wordsMap = listWordsWithOccurance(file.getPath());
+		
+		Set<Map.Entry<String, Integer>> entrySet = wordsMap.entrySet();
+		System.out.println("Words" + "\t\t" + "# of Occurances");
+		for (Map.Entry<String, Integer> entry : entrySet) {
+			System.out.println(entry.getKey() + "\t\t" + entry.getValue());
+		}
+		List<String> myTopOccurrence = filterMaxOccurance(wordsMap, 1);
+		System.out.println("\nMaixmum Occurance of Word in file: ");
+		for (String result : myTopOccurrence) {
+			System.out.println("==> " + result);
+		}
 	}
 }
