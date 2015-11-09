@@ -6,8 +6,22 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CoreJava</name>
 	<description>Excellent examples to learn Core Java</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<coveralls.version>4.0.0</coveralls.version>
+		<jacoco.version>0.7.2.201409121644</jacoco.version>
+	</properties>
+
+	<dependencies>
+		<!-- Junit dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+	</dependencies>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>src</directory>
@@ -16,8 +30,44 @@
 				</excludes>
 			</resource>
 		</resources>
+		<pluginManagement>
+			<plugins>
+				<!-- This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. TODO: Remove when the 
+					m2e plugin can correctly bind to Maven lifecycle -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jacoco</groupId>
+										<artifactId>
+											jacoco-maven-plugin
+										</artifactId>
+										<versionRange>
+											[0.6.2,)
+										</versionRange>
+										<goals>
+											<goal>prepare-agent</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
 				<configuration>
@@ -25,6 +75,60 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>${coveralls.version}</version>
+				<configuration>
+					<repoToken>UwRD1lxzU3iWBVk0ECENX4nPzkhrAquCn</repoToken>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<!-- The following exclude configuration was added because error occurred 
+					when executing "mvn clean test jacoco:report coveralls:report" -->
+				<!-- [ERROR] Failed to execute goal org.eluder.coveralls:coveralls-maven-plugin:3.1.0:report 
+					(default-cli) on project java-design-patterns: I/O operation failed: No source 
+					found for domainapp/dom/modules/simple/QSimpleObject.java -> [Help 1] -->
+				<configuration>
+					<excludes>
+						<exclude>domainapp/dom/modules/simple/QSimpleObject.class</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!--checkstyle plug-in. checking against googles styles see config at 
+				checkstyle.xml -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>2.15</version>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>validate</phase>
+						<configuration>
+							<configLocation>checkstyle.xml</configLocation>
+							<encoding>UTF-8</encoding>
+							<consoleOutput>false</consoleOutput>
+							<failsOnError>false</failsOnError>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
 	</build>
 </project>
