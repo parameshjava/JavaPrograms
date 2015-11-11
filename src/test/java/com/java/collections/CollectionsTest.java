@@ -49,5 +49,23 @@ public class CollectionsTest {
 		
 		assertTrue(productA.equals(productB));
 		assertFalse(productA.equals(productC));
+		assertSame(productA.hashCode(), productB.hashCode());
+		assertNotSame(productA.hashCode(), productC.hashCode());
+		
+		productB = new Product(2, null, 1500.00);
+		productC = new Product(1, "MotoX", 0);
+		assertFalse(productB.equals(productC));
+		assertNotSame(productB.hashCode(), productC.hashCode());
+		
+		productB = new Product(2, null, 0);
+		productC = new Product(1, null, 0);
+		assertTrue(productB.equals(productC));
+		assertTrue(productB.equals(productB));
+		assertFalse(productB.equals(null));
+		assertSame(productB.hashCode(), productC.hashCode());
+		
+		productB = new Product(2, "MotoX", 1600.50);
+		productC = new Product(1, "MotoG", 1600.50);
+		assertFalse(productB.equals(productC));
 	}
 }
