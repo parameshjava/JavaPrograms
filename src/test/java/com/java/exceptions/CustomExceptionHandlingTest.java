@@ -44,6 +44,7 @@ public class CustomExceptionHandlingTest extends TestCase {
 			customException.validateLogin("Rahul", "secret");
 		} catch (Exception e) {
 			assertTrue(e.getMessage().equals("Username not converted as number"));
+			assertTrue(e.getCause() instanceof NumberFormatException);
 		}
 	}
 	

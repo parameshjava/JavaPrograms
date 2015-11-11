@@ -1,4 +1,4 @@
-package com.java.loops;
+package com.java.collections;
 
 import static org.junit.Assert.*;
 
@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import com.java.collections.MapExample;
 
-public class MapExampleTest {
+public class CollectionsTest {
 
 	MapExample mapExample = new MapExample();
 	
@@ -32,6 +32,7 @@ public class MapExampleTest {
 	public void testLinkedHashMapDemo() {
 		Map<String, Integer> map = mapExample.linkedHashMapDemo();
 		assertTrue(map instanceof LinkedHashMap);
+		
 	}
 
 	@Test
@@ -39,5 +40,14 @@ public class MapExampleTest {
 		Map<String, Integer> map = mapExample.sortedMapDemo();
 		assertTrue(map instanceof TreeMap);
 	}
-
+	
+	@Test
+	public void testEquality() {
+		Product productA = new Product(1, "MotoX", 1500.00);
+		Product productB = new Product(2, "MotoX", 1500.00);
+		Product productC = new Product(1, "MotoX", 1400.00);
+		
+		assertTrue(productA.equals(productB));
+		assertFalse(productA.equals(productC));
+	}
 }

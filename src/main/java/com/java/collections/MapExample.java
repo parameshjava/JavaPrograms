@@ -55,20 +55,5 @@ public class MapExample {
 		
 		return map;
 	}
-	
-	public static void main(String[] args) {
-		MapExample example = new MapExample();
-		Map<String, Integer> hashtable = example.hashTableDemo();
-		System.out.println("Hash Table : " + hashtable);
-		
-		Map<String, Integer> hashmap = example.hashMapDemo();
-		System.out.println("Hash Map : " + hashmap);
-		
-		Map<String, Integer> likedHashmap = example.linkedHashMapDemo();
-		System.out.println("Linked Hash Map : " + likedHashmap);
-		
-		Map<String, Integer> sortedMap = example.sortedMapDemo();
-		System.out.println("Tree map : " + sortedMap);
-	}
 
 }

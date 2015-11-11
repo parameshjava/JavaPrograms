@@ -16,10 +16,4 @@ public class StringReverse {
 		}
 		return buffer.toString();
 	}
-
-	public static void main(String[] args) {
-		System.out.println("1. " + reverseRecursive("Paramesh"));
-		System.out.println("2. " + reverseString("Paramesh"));
-	}
-
 }

@@ -14,6 +14,11 @@ public class StringReverseTest {
 		assertTrue(reverseStr1.equals(reverseStr2));
 		assertThat("napaJ", is(reverseStr1));
 		assertThat("napaJ", is(reverseStr2));
+		
+		String reverseSingleChar1 = StringReverse.reverseRecursive("J");
+		String reverseSingleChar2 = StringReverse.reverseString("J");
+		assertThat("J", is(reverseSingleChar1));
+		assertThat("J", is(reverseSingleChar2));
 	}
 
 }
