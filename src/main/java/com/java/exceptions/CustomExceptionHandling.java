@@ -16,7 +16,7 @@ package com.java.exceptions;
  * @author Paramesh
  *
  */
-public class UserDefinedExceptionHandling {
+public class CustomExceptionHandling {
 
 	/**
 	 * Performs authentication mechanism
@@ -29,7 +29,7 @@ public class UserDefinedExceptionHandling {
 	 * @throws InvalidCredentialsException
 	 *             when client provided invalid input
 	 */
-	public boolean performLogin(String username, String password) throws InvalidCredentialsException {
+	public boolean validateLogin(String username, String password) throws InvalidCredentialsException {
 		// 1. Throw user defined exception when user key in blank in username field
 		if (username == null) {
 			throw new InvalidCredentialsException("Username should not be blank");
@@ -57,9 +57,9 @@ public class UserDefinedExceptionHandling {
 	}
 
 	public static void main(String[] args) {
-		UserDefinedExceptionHandling handle = new UserDefinedExceptionHandling();
+		CustomExceptionHandling handle = new CustomExceptionHandling();
 		try {
-			handle.performLogin("rahul", "password");
+			handle.validateLogin("rahul", "password");
 		} catch (InvalidCredentialsException e) {
 			e.printStackTrace();
 		}

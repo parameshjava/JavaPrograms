@@ -10,36 +10,12 @@ env:
    #   via the "travis encrypt" command using the project repo's public key
   - secure: "YRvquYLB9JDGmGHw0Ufn4jTIXmZiCOB5Nsh9nGRlgLZCCuSu847taIV+K9Bkj5OUgvixvkOjALkpOfB3/1b24gHdKwiUku7UEE+Pi7VIvne+svwrIKR6KMqgp78gYufBsreYSc95quQDwuS0f800cNhSYrKN3W4mO2n9/afHFBAaOeM2s+E9fYaqL4RSrJOm0ZM0rpFVoyjgYuQO3Egtt9ToYeGhP5SR0sVfs0AogKueFrun9ydL/YfRgiGY/PSPWflNIdHxCmKEwyMH+S5Bbvi3j+xe7Wi0llJLf2ga3S/+UTqzx+F/pLOXlCX5kbSlD+5ZlUtI8ls5hkkVl8irfuxFGE/uh/RQ1BgR4M2uabjc/kycSvKg13yts9QYQUbNnlK6tVSzjeWLQOrQnkp9T9gR1SWnKpYJA710iNEX33EPwPwhDOjsy8J7aAbTYcdAG60uLPpJrYSlV4DI6Vycc/hzbU7VJ5BC+E3FD4ExY/DfkkkUY/CIFMEGomb02wzLC+ny2iuMEl/hP4oZT+FFCCsjKxO0OiT9gB7UvLxKT0jAWZJ6O7emZDM4kzyHvqVL9ME25lNM88vtIlSnjN8PdPgBwQVed9eqHL8e//+DXjIx62G2QjKTpUA0JEPTuqD9elCEMrRQynRzX5Hwd31T5n4RJwC9l6Puzt/6bPM4qqo="
   
-addons:
-  coverity_scan:
-
-    # GitHub project metadata
-    # ** specific to your project **
-    project:
-      name: parameshjava/JavaPrograms
-      description: "Build submitted via Travis CI"
-
-    # Where email notification of build analysis results will be sent
-    notification_email: paramesh.java5@gmail.com
-
-    # Commands to prepare for build_command
-    # ** likely specific to your build **
-    build_command_prepend: "./configure"
-
-    # The command that will be added as an argument to "cov-build" to compile your project for analysis,
-    # ** likely specific to your build **
-    build_command: "make -j2"
-
-    # Pattern to match selecting branches that will run analysis. We recommend leaving this set to 'coverity_scan'.
-    # Take care in resource usage, and consider the build frequency allowances per
-    #   https://scan.coverity.com/faq#frequency
-    branch_pattern: master
-    
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 
 after_success:
-- mvn clean test saga:coverage cobertura:cobertura coveralls:report
+- mvn clean test saga:coverage cobertura:cobertura
+- bash update-ghpages.sh
 
 sudo: false
