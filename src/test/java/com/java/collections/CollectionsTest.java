@@ -1,6 +1,7 @@
 package com.java.collections;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.*;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -49,7 +50,7 @@ public class CollectionsTest {
 		
 		assertTrue(productA.equals(productB));
 		assertFalse(productA.equals(productC));
-		assertSame(productA.hashCode(), productB.hashCode());
+		assertThat(Integer.compareUnsigned(productA.hashCode(), productB.hashCode()), is(0));
 		assertNotSame(productA.hashCode(), productC.hashCode());
 		
 		productB = new Product(2, null, 1500.00);
@@ -62,7 +63,7 @@ public class CollectionsTest {
 		assertTrue(productB.equals(productC));
 		assertTrue(productB.equals(productB));
 		assertFalse(productB.equals(null));
-		assertSame(productB.hashCode(), productC.hashCode());
+		assertThat(Integer.compareUnsigned(productB.hashCode(), productC.hashCode()), is(0));
 		
 		productB = new Product(2, "MotoX", 1600.50);
 		productC = new Product(1, "MotoG", 1600.50);
