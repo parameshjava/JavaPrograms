@@ -14,17 +14,14 @@
  * under the License.
  * 
  */
- 
+
 package com.java.quartz;
 
-import java.util.Date;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <p>
@@ -41,8 +38,7 @@ public class SimpleJob implements Job {
      * Quartz requires a public empty constructor so that the
      * scheduler can instantiate the class whenever it needs.
      */
-    public SimpleJob() {
-    }
+    public SimpleJob() {}
 
     /**
      * <p>
@@ -54,8 +50,7 @@ public class SimpleJob implements Job {
      * @throws JobExecutionException
      *             if there is an exception while executing the job.
      */
-    public void execute(JobExecutionContext context)
-        throws JobExecutionException {
+    public void execute(JobExecutionContext context) throws JobExecutionException {
 
         LOGGER.info("{}", context.getJobDetail());
     }

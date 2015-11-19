@@ -14,6 +14,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * <b>Problem description:</b> From a given file.<br>
  * 1. List down all the words and number of their occurrences.<br>
@@ -25,94 +28,95 @@ import java.util.Set;
  *
  */
 public class FileOperations {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(FileOperations.class);
 
-	public static Map<String, Integer> listWordsWithOccurance(String filePath)
-			throws FileNotFoundException, IOException {
+    public static Map<String, Integer> listWordsWithOccurance(String filePath) throws FileNotFoundException, IOException {
 
-		File file = new File(filePath);
-		// .getAbsoluteFile();
-		BufferedReader bufferedReader = null;
-		bufferedReader = new BufferedReader(new FileReader(file));
-		String inputLine = null;
-		Map<String, Integer> wordsMap = new HashMap<>();
+        File file = new File(filePath);
+        // .getAbsoluteFile();
+        BufferedReader bufferedReader = null;
+        bufferedReader = new BufferedReader(new FileReader(file));
+        String inputLine = null;
+        Map<String, Integer> wordsMap = new HashMap<>();
 
-		try {
-			while ((inputLine = bufferedReader.readLine()) != null) {
-				String[] words = inputLine.split("[ \n\t\r.,;:!?(){}]");
+        try {
+            while ((inputLine = bufferedReader.readLine()) != null) {
+                String[] words = inputLine.split("[ \n\t\r.,;:!?(){}]");
 
-				for (String word : words) {
-					// .toLowerCase for Case insensitive result.
-					String key = word.toLowerCase();
-					if (key.length() > 0) {
-						if (wordsMap.get(key) == null) {
-							wordsMap.put(key, 1);
-						} else {
-							int value = wordsMap.get(key);
-							value++;
-							wordsMap.put(key, value);
-						}
-					}
-				}
-			}
-		} catch (IOException error) {
-			System.out.println("Invalid File");
-		} finally {
-			bufferedReader.close();
-		}
-		return wordsMap;
-	}
+                for (String word : words) {
+                    // .toLowerCase for Case insensitive result.
+                    String key = word.toLowerCase();
+                    if (key.length() > 0) {
+                        if (wordsMap.get(key) == null) {
+                            wordsMap.put(key, 1);
+                        } else {
+                            int value = wordsMap.get(key);
+                            value++;
+                            wordsMap.put(key, value);
+                        }
+                    }
+                }
+            }
+        } catch (IOException error) {
+            System.out.println("Invalid File");
+        } finally {
+            bufferedReader.close();
+        }
+        return wordsMap;
+    }
 
-	/**
-	 * @param map
-	 *            = All Words in map
-	 * @param noOfTopElements
-	 *            = How many top elements you want to print? If n=1 it will
-	 *            print highest occurrence word. If n=2 it will print top 2
-	 *            highest occurrence words.
-	 * @return list of Strings
-	 */
-	public static List<String> filterMaxOccurance(Map<String, Integer> map, int noOfTopElements) {
+    /**
+     * @param map
+     *            = All Words in map
+     * @param noOfTopElements
+     *            = How many top elements you want to print? If n=1 it will
+     *            print highest occurrence word. If n=2 it will print top 2
+     *            highest occurrence words.
+     * @return list of Strings
+     */
+    public static List<String> filterMaxOccurance(Map<String, Integer> map, int noOfTopElements) {
 
-		List<Entry<String, Integer>> entryList = new ArrayList<>();
-		for (Map.Entry<String, Integer> entry : map.entrySet()) {
-			entryList.add(entry);
-		}
+        List<Entry<String, Integer>> entryList = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            entryList.add(entry);
+        }
 
-		Collections.sort(entryList, new Comparator<Entry<String, Integer>>() {
+        Collections.sort(entryList, new Comparator<Entry<String, Integer>>() {
 
-			@Override
-			public int compare(Entry<String, Integer> entry1, Entry<String, Integer> entry2) {
-				// For ascending order
-				// int compare = Integer.compare(entry1.getValue(),
-				// entry2.getValue());
-				// For descending order
-				int compare = Integer.compare(entry2.getValue(), entry1.getValue());
-				return compare != 0 ? compare : entry1.getKey().compareTo(entry2.getKey());
-			}
+            @Override
+            public int compare(Entry<String, Integer> entry1, Entry<String, Integer> entry2) {
+                // For ascending order
+                // int compare = Integer.compare(entry1.getValue(),
+                // entry2.getValue());
+                // For descending order
+                int compare = Integer.compare(entry2.getValue(), entry1.getValue());
+                return compare != 0 ? compare : entry1.getKey().compareTo(entry2.getKey());
+            }
 
-		});
+        });
 
-		List<String> list = new ArrayList<>();
-		for (Entry<String, Integer> entry : entryList.subList(0, noOfTopElements)) {
-			list.add(entry.getKey() + " : " + entry.getValue());
-		}
-		return list;
-	}
+        List<String> list = new ArrayList<>();
+        for (Entry<String, Integer> entry : entryList.subList(0, noOfTopElements)) {
+            list.add(entry.getKey() + " : " + entry.getValue());
+        }
+        return list;
+    }
 
-	public static void main(String[] args) throws FileNotFoundException, IOException {
-		File file = new File("src/main/resources/test_file.txt").getAbsoluteFile();
-		
-		Map<String, Integer> wordsMap = listWordsWithOccurance(file.getPath());
-		
-		Set<Map.Entry<String, Integer>> entrySet = wordsMap.entrySet();
-		System.out.println("Words" + "\t\t" + "# of Occurances");
-		for (Map.Entry<String, Integer> entry : entrySet) {
-			System.out.println(entry.getKey() + "\t\t" + entry.getValue());
-		}
-		List<String> myTopOccurrence = filterMaxOccurance(wordsMap, 1);
-		System.out.println("\nMaixmum Occurance of Word in file: ");
-		for (String result : myTopOccurrence) {
-			System.out.println("==> " + result);
-		}
-	}
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        File file = new File("src/main/resources/test_file.txt").getAbsoluteFile();
+
+        Map<String, Integer> wordsMap = listWordsWithOccurance(file.getPath());
+
+        Set<Map.Entry<String, Integer>> entrySet = wordsMap.entrySet();
+        LOGGER.info("Words" + "\t\t" + "# of Occurances");
+        for (Map.Entry<String, Integer> entry : entrySet) {
+            System.out.println(entry.getKey() + "\t\t" + entry.getValue());
+        }
+        List<String> myTopOccurrence = filterMaxOccurance(wordsMap, 1);
+        LOGGER.info("\nMaixmum Occurance of Word in file: ");
+        for (String result : myTopOccurrence) {
+            LOGGER.info("==> " + result);
+        }
+    }
 }

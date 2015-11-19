@@ -40,119 +40,120 @@ import java.util.Date;
  */
 public class CronTriggerExample {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(CronTriggerExample.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CronTriggerExample.class);
 
-	public void run() throws Exception {
+    public void run() throws Exception {
 
-		LOGGER.info("------- Initializing -------------------");
+        LOGGER.info("------- Initializing -------------------");
 
-		// First we must get a reference to a scheduler
-		SchedulerFactory sf = new StdSchedulerFactory();
-		Scheduler sched = sf.getScheduler();
+        // First we must get a reference to a scheduler
+        SchedulerFactory sf = new StdSchedulerFactory();
+        Scheduler sched = sf.getScheduler();
 
-		LOGGER.info("------- Initialization Complete --------");
+        LOGGER.info("------- Initialization Complete --------");
 
-		LOGGER.info("------- Scheduling Jobs ----------------");
+        LOGGER.info("------- Scheduling Jobs ----------------");
 
-		// jobs can be scheduled before sched.start() has been called
+        // jobs can be scheduled before sched.start() has been called
 
-		// job 1 will run every 20 seconds
-		JobDetail job = newJob(SimpleJob.class).withIdentity("First Job", Scheduler.DEFAULT_GROUP).build();
+        // job 1 will run every 20 seconds
+        JobDetail job = newJob(SimpleJob.class).withIdentity("First Job", Scheduler.DEFAULT_GROUP).build();
 
-		CronTrigger trigger = newTrigger().withIdentity("First Trigger", Scheduler.DEFAULT_GROUP)
-				.withSchedule(cronSchedule("0/20 * * * * ?")).build();
+        CronTrigger trigger = newTrigger().withIdentity("First Trigger", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0/20 * * * * ?")).build();
 
-		Date ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        Date ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 2 will run every other minute (at 15 seconds past the minute)
-		job = newJob(SimpleJob.class).withIdentity("job2", Scheduler.DEFAULT_GROUP).build();
+        // job 2 will run every other minute (at 15 seconds past the minute)
+        job = newJob(SimpleJob.class).withIdentity("job2", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger2", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("15 0/2 * * * ?")).build();
+        trigger = newTrigger().withIdentity("trigger2", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("15 0/2 * * * ?"))
+                .build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 3 will run every other minute but only between 8am and 5pm
-		job = newJob(SimpleJob.class).withIdentity("job3", Scheduler.DEFAULT_GROUP).build();
+        // job 3 will run every other minute but only between 8am and 5pm
+        job = newJob(SimpleJob.class).withIdentity("job3", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger3", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("0 0/2 8-17 * * ?"))
-				.build();
+        trigger = newTrigger().withIdentity("trigger3", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0 0/2 8-17 * * ?")).build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 4 will run every three minutes but only between 5pm and 11pm
-		job = newJob(SimpleJob.class).withIdentity("job4", Scheduler.DEFAULT_GROUP).build();
+        // job 4 will run every three minutes but only between 5pm and 11pm
+        job = newJob(SimpleJob.class).withIdentity("job4", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger4", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("0 0/3 17-23 * * ?"))
-				.build();
+        trigger = newTrigger().withIdentity("trigger4", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0 0/3 17-23 * * ?")).build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 5 will run at 10am on the 1st and 15th days of the month
-		job = newJob(SimpleJob.class).withIdentity("job5", Scheduler.DEFAULT_GROUP).build();
+        // job 5 will run at 10am on the 1st and 15th days of the month
+        job = newJob(SimpleJob.class).withIdentity("job5", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger5", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("0 0 10am 1,15 * ?"))
-				.build();
+        trigger = newTrigger().withIdentity("trigger5", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0 0 10am 1,15 * ?")).build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 6 will run every 30 seconds but only on Weekdays (Monday through
-		// Friday)
-		job = newJob(SimpleJob.class).withIdentity("job6", Scheduler.DEFAULT_GROUP).build();
+        // job 6 will run every 30 seconds but only on Weekdays (Monday through
+        // Friday)
+        job = newJob(SimpleJob.class).withIdentity("job6", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger6", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("0,30 * * ? * MON-FRI"))
-				.build();
+        trigger = newTrigger().withIdentity("trigger6", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0,30 * * ? * MON-FRI")).build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		// job 7 will run every 30 seconds but only on Weekends (Saturday and
-		// Sunday)
-		job = newJob(SimpleJob.class).withIdentity("job7", Scheduler.DEFAULT_GROUP).build();
+        // job 7 will run every 30 seconds but only on Weekends (Saturday and
+        // Sunday)
+        job = newJob(SimpleJob.class).withIdentity("job7", Scheduler.DEFAULT_GROUP).build();
 
-		trigger = newTrigger().withIdentity("trigger7", Scheduler.DEFAULT_GROUP).withSchedule(cronSchedule("0,30 * * ? * SAT,SUN"))
-				.build();
+        trigger = newTrigger().withIdentity("trigger7", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0,30 * * ? * SAT,SUN")).build();
 
-		ft = sched.scheduleJob(job, trigger);
-		LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
+        ft = sched.scheduleJob(job, trigger);
+        LOGGER.info("Job Key {}, execution time {}, cron expression {} ", job.getKey(), ft, trigger.getCronExpression());
 
-		LOGGER.info("------- Starting Scheduler ----------------");
+        LOGGER.info("------- Starting Scheduler ----------------");
 
-		// All of the jobs have been added to the scheduler, but none of the
-		// jobs
-		// will run until the scheduler has been started
-		sched.start();
+        // All of the jobs have been added to the scheduler, but none of the
+        // jobs
+        // will run until the scheduler has been started
+        sched.start();
 
-		LOGGER.info("------- Started Scheduler -----------------");
+        LOGGER.info("------- Started Scheduler -----------------");
 
-		LOGGER.info("------- Waiting five minutes... ------------");
-		try {
-			// wait five minutes to show jobs
-			Thread.sleep(300L * 1000L);
-			// executing...
-		} catch (Exception e) {
-			//
-		}
+        LOGGER.info("------- Waiting five minutes... ------------");
+        try {
+            // wait five minutes to show jobs
+            Thread.sleep(300L * 1000L);
+            // executing...
+        } catch (Exception e) {
+            //
+        }
 
-		LOGGER.info("------- Shutting Down ---------------------");
+        LOGGER.info("------- Shutting Down ---------------------");
 
-		sched.shutdown(true);
+        sched.shutdown(true);
 
-		LOGGER.info("------- Shutdown Complete -----------------");
+        LOGGER.info("------- Shutdown Complete -----------------");
 
-		SchedulerMetaData metaData = sched.getMetaData();
-		LOGGER.info("Executed " + metaData.getNumberOfJobsExecuted() + " jobs.");
+        SchedulerMetaData metaData = sched.getMetaData();
+        LOGGER.info("Executed " + metaData.getNumberOfJobsExecuted() + " jobs.");
 
-	}
+    }
 
-	public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
 
-		CronTriggerExample example = new CronTriggerExample();
-		example.run();
-	}
+        CronTriggerExample example = new CronTriggerExample();
+        example.run();
+    }
 
 }

@@ -18,50 +18,50 @@ package com.java.exceptions;
  */
 public class CustomExceptionHandling {
 
-	/**
-	 * Performs authentication mechanism
-	 * 
-	 * @param username
-	 *            user name of the client
-	 * @param password
-	 *            password of the client
-	 * @return ture if authentication success, otherwise false
-	 * @throws InvalidCredentialsException
-	 *             when client provided invalid input
-	 */
-	public boolean validateLogin(String username, String password) throws InvalidCredentialsException {
-		// 1. Throw user defined exception when user key in blank in username field
-		if (username == null) {
-			throw new InvalidCredentialsException("Username should not be blank");
-		}
+    /**
+     * Performs authentication mechanism
+     * 
+     * @param username
+     *            user name of the client
+     * @param password
+     *            password of the client
+     * @return ture if authentication success, otherwise false
+     * @throws InvalidCredentialsException
+     *             when client provided invalid input
+     */
+    public boolean validateLogin(String username, String password) throws InvalidCredentialsException {
+        // 1. Throw user defined exception when user key in blank in username field
+        if (username == null) {
+            throw new InvalidCredentialsException("Username should not be blank");
+        }
 
-		// 2. Throw user defined exception when user key in blank in password field
-		if (password == null) {
-			throw new InvalidCredentialsException("Password should not be blank");
-		}
+        // 2. Throw user defined exception when user key in blank in password field
+        if (password == null) {
+            throw new InvalidCredentialsException("Password should not be blank");
+        }
 
-		try {
-			// Try to convert given string to Integer format
-			int number = Integer.parseInt(username);
-			// Login successful when user key in username as number format convertible and password is secret
-			if (number > 0 && password.equals("secret")) {
-				return true;
-			} else {
-				// 4. Throw user defined exception when given inputs are not matched with the criteria
-				throw new InvalidCredentialsException("Username and password not matched");
-			}
-		} catch (NumberFormatException exp) {
-			// 3. Throw user defined exception along with the actual cause when given username not able to convert as number
-			throw new InvalidCredentialsException("Username not converted as number", exp);
-		}
-	}
+        try {
+            // Try to convert given string to Integer format
+            int number = Integer.parseInt(username);
+            // Login successful when user key in username as number format convertible and password is secret
+            if (number > 0 && password.equals("secret")) {
+                return true;
+            } else {
+                // 4. Throw user defined exception when given inputs are not matched with the criteria
+                throw new InvalidCredentialsException("Username and password not matched");
+            }
+        } catch (NumberFormatException exp) {
+            // 3. Throw user defined exception along with the actual cause when given username not able to convert as number
+            throw new InvalidCredentialsException("Username not converted as number", exp);
+        }
+    }
 
-	public static void main(String[] args) {
-		CustomExceptionHandling handle = new CustomExceptionHandling();
-		try {
-			handle.validateLogin("rahul", "password");
-		} catch (InvalidCredentialsException e) {
-			e.printStackTrace();
-		}
-	}
+    public static void main(String[] args) {
+        CustomExceptionHandling handle = new CustomExceptionHandling();
+        try {
+            handle.validateLogin("rahul", "password");
+        } catch (InvalidCredentialsException e) {
+            e.printStackTrace();
+        }
+    }
 }
