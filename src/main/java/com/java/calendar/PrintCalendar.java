@@ -1,16 +1,16 @@
 package com.java.calendar;
 
 /**
- * Prints the calender for given given month in a year.
+ * Prints the calendar for given given month in a year.
  * 
  * @author Paramesh
  *
  */
 public class PrintCalendar {
 	
-	// http://www.indiabix.com/aptitude/calendar/formulas
+	//Reference for Odd Days : http://www.indiabix.com/aptitude/calendar/formulas
 	static String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-	static int[] daysInMonth = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	static int[] monthlyDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	/**
 	 * 
@@ -60,15 +60,31 @@ public class PrintCalendar {
 		int duration = 0;
 
 		for (int i = 0; i < (month - 1); i++) {
-			duration = duration + daysInMonth[i];
+			duration = duration + monthlyDays[i];
 		}
 
 		// For leaf year, odd days = 2 due to Feb. 100th year is not a leaf year but 400th Year is a leaf year
-		duration = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) && month > 2) ? (duration + 1) : duration;
+		duration = (isLeapYear(year) && month > 2) ? (duration + 1) : duration;
 		
 		oddDays = (oddDays + duration + day) % 7;
 		
 		return oddDays;
+	}
+	
+	/**
+	 * Determines whether the given year is Leap year or not.
+	 * 
+	 * @param year any year
+	 * @return true if given year is a leap year, otherwise false
+	 */
+	public static boolean isLeapYear(int year) {
+		if (year % 4 == 0) {
+			if (year % 100 == 0 && year % 400 != 0) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -92,7 +108,9 @@ public class PrintCalendar {
 			buffer.append(String.format(format, " "));
 		}
 		
-		for (int currDay = 1; currDay <= daysInMonth[month-1]; currDay++) {
+		// Add 1 extra day for February which falls under a Leap Year
+		int daysInMonth = (month == 2 && isLeapYear(year)) ? (monthlyDays[month-1] + 1) : monthlyDays[month-1];
+		for (int currDay = 1; currDay <= daysInMonth; currDay++) {
 			buffer.append(String.format(format, currDay));
 			if((currDay + oddDays) % 7 == 0) {
 				buffer.append("\n");
@@ -100,17 +118,4 @@ public class PrintCalendar {
 		}
 		return buffer.toString();
 	}
-
-	public static void main(String[] args) {
-
-		String day = getDay(1, 11, 2015);
-		System.out.println("Given day : " + day);
-
-		String day1 = getDay(1, 1, 1);
-		System.out.println("Given day : " + day1);
-		System.out.println(getCalender(3, 1900));
-		System.out.println();
-		System.out.println(getCalender(11, 2015));
-	}
-
 }
