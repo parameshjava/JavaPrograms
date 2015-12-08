@@ -12,10 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <b>Problem description:</b> From a given file.<br>
@@ -29,8 +25,6 @@ import org.slf4j.LoggerFactory;
  */
 public class FileOperations {
     
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileOperations.class);
-
     public static Map<String, Integer> listWordsWithOccurance(String filePath) throws FileNotFoundException, IOException {
 
         File file = new File(filePath);
@@ -101,22 +95,5 @@ public class FileOperations {
             list.add(entry.getKey() + " : " + entry.getValue());
         }
         return list;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        File file = new File("src/main/resources/test_file.txt").getAbsoluteFile();
-
-        Map<String, Integer> wordsMap = listWordsWithOccurance(file.getPath());
-
-        Set<Map.Entry<String, Integer>> entrySet = wordsMap.entrySet();
-        LOGGER.info("Words" + "\t\t" + "# of Occurances");
-        for (Map.Entry<String, Integer> entry : entrySet) {
-            System.out.println(entry.getKey() + "\t\t" + entry.getValue());
-        }
-        List<String> myTopOccurrence = filterMaxOccurance(wordsMap, 1);
-        LOGGER.info("\nMaixmum Occurance of Word in file: ");
-        for (String result : myTopOccurrence) {
-            LOGGER.info("==> " + result);
-        }
     }
 }

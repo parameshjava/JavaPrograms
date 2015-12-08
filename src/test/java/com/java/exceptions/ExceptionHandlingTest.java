@@ -1,6 +1,7 @@
 package com.java.exceptions;
 
 import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.isA;
 
 import org.junit.Test;
 
@@ -15,6 +16,10 @@ public class ExceptionHandlingTest {
 		// Exception should be handled in the 2nd method call and sum1 & sum2
 		// should produce same result
 		assertEquals(sum1, sum2);
+		
+		int sum3 = ExceptionHandling.summation();
+		assertThat(sum3, isA(Integer.class));
+		assertEquals(sum3, 0);
 	}
 
 }

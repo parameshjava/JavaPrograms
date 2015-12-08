@@ -1,7 +1,5 @@
 package com.java.exceptions;
 
-import static org.junit.Assert.*;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -56,6 +54,11 @@ public class CustomExceptionHandlingTest extends TestCase {
 			assertTrue(e.getMessage().equals("Username and password not matched"));
 		}
 	}
+	
+    public void testPerformLoginSuccess() {
+        boolean isSuccess = customException.validateLogin("123456", "secret");
+        assertTrue(isSuccess);
+    }
 	
 	@Override
 	public void tearDown() {

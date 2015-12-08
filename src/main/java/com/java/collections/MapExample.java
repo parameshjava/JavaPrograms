@@ -61,11 +61,4 @@ public class MapExample {
         return map;
     }
 
-    public static void main(String[] args) {
-        MapExample example = new MapExample();
-        LOGGER.info("Hashtable : " + example.hashTableDemo());
-        LOGGER.info("HashMap : " + example.hashMapDemo());
-        LOGGER.info("LinkedHashMap : " + example.linkedHashMapDemo());
-        LOGGER.info("TreeMap : " + example.sortedMapDemo());
-    }
 }

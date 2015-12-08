@@ -33,10 +33,4 @@ public class ExceptionHandling {
         }
         return sum;
     }
-
-    public static void main(String[] args) {
-        int sum1 = summation("1", "3", "abc", "5");
-        LOGGER.info("Sum1 = " + sum1);
-    }
-
 }

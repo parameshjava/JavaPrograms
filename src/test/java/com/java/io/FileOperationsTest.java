@@ -40,4 +40,16 @@ public class FileOperationsTest {
 		List<String> expectedList = Arrays.asList("Rahul : 15", "Ranjith : 12");
 		assertTrue(Objects.equals(expectedList, actualList));
 	}
+
+    @Test(expected = IOException.class)
+    public void testListWordsWithOccuranceWithInvalidPath() throws FileNotFoundException, IOException {
+        File file = new File("").getAbsoluteFile();
+        FileOperations.listWordsWithOccurance(file.getPath());
+    }
+
+    @Test(expected = FileNotFoundException.class)
+    public void testListWordsWithOccuranceWithInvalidFile() throws FileNotFoundException, IOException {
+        File file = new File("abcd.txt").getAbsoluteFile();
+        FileOperations.listWordsWithOccurance(file.getPath());
+    }
 }
