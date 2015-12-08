@@ -28,7 +28,7 @@ public class ExceptionHandling {
                  * convert String "abc" to number, its generate NumberFormatException exception and reaches the same runtime
                  * environment.
                  */
-                LOGGER.error("Given input number : " + number + " is not a number, so cannot include in sum calculation");
+                LOGGER.warn("Given input number : " + number + " is not a number, so cannot include in sum calculation");
             }
         }
         return sum;

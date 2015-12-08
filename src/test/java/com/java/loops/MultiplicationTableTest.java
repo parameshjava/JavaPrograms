@@ -9,7 +9,7 @@ public class MultiplicationTableTest {
 
 	@Test
 	public void testPrintMul() {
-		String table = MultiplicationTable.printMultiplicationTable(10);
+		String table = MultiplicationTable.generateMultiplicationTable(10);
 		assertNotNull(table);
 		String[] rows = table.split("\n");
 		System.out.println(table);
