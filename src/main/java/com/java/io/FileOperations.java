@@ -24,17 +24,16 @@ import java.util.Map.Entry;
  *
  */
 public class FileOperations {
-    
+
     public static Map<String, Integer> listWordsWithOccurance(String filePath) throws FileNotFoundException, IOException {
 
         File file = new File(filePath);
         // .getAbsoluteFile();
-        BufferedReader bufferedReader = null;
-        bufferedReader = new BufferedReader(new FileReader(file));
         String inputLine = null;
         Map<String, Integer> wordsMap = new HashMap<>();
 
-        try {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));) {
+
             while ((inputLine = bufferedReader.readLine()) != null) {
                 String[] words = inputLine.split("[ \n\t\r.,;:!?(){}]");
 
@@ -52,10 +51,8 @@ public class FileOperations {
                     }
                 }
             }
-        } catch (IOException error) {
-            System.out.println("Invalid File");
-        } finally {
-            bufferedReader.close();
+        } catch (Exception error) {
+           throw error;
         }
         return wordsMap;
     }

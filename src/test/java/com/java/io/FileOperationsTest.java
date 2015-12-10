@@ -45,11 +45,12 @@ public class FileOperationsTest {
     public void testListWordsWithOccuranceWithInvalidPath() throws FileNotFoundException, IOException {
         File file = new File("").getAbsoluteFile();
         FileOperations.listWordsWithOccurance(file.getPath());
+        
     }
 
     @Test(expected = FileNotFoundException.class)
     public void testListWordsWithOccuranceWithInvalidFile() throws FileNotFoundException, IOException {
         File file = new File("abcd.txt").getAbsoluteFile();
-        FileOperations.listWordsWithOccurance(file.getPath());
+        FileOperations.listWordsWithOccurance(file.getPath()); 
     }
 }
