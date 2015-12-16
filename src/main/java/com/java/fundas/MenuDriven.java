@@ -1,4 +1,4 @@
-package com.java.control.statements;
+package com.java.fundas;
 
 import java.util.Arrays;
 import java.util.Scanner;

@@ -13,6 +13,7 @@ public class DeadLockDemo {
     String str2 = "UNIX";
 
     Thread trd1 = new Thread("My Thread 1") {
+        @Override
         public void run() {
             int i = 1;
             while (true) {
@@ -42,6 +43,7 @@ public class DeadLockDemo {
         DeadLockDemo lock = new DeadLockDemo();
         lock.trd1.setPriority(3);
         lock.trd2.setPriority(2);
+        
         lock.trd2.start();
         lock.trd1.start();
     }
