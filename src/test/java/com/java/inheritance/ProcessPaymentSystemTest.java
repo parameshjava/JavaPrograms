@@ -1,3 +1,5 @@
+package com.java.inheritance;
+
 import org.junit.Test;
 
 import com.java.inheritance.ContractEmployee;

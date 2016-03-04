@@ -31,7 +31,7 @@ public class MultiplicationTable {
         // 1.1 Print "*  |" in first line for first time with required number of spaces
         buffer.append(String.format("%" + spaces + "s |", "*"));
 
-        // 1.2 Print numbers up to given range
+        // 1.2 Print numbers up to given range for header
         for (int i = 1; i <= number; i++) {
             buffer.append(String.format("%" + spaces + "s", i));
         }
@@ -45,7 +45,9 @@ public class MultiplicationTable {
 
         buffer.append("\n");
 
+        // Generating multiplication table
         for (int i = 1; i <= number; i++) {
+            // Left side printing the number fot which we are generating multiplication table
             buffer.append(String.format("%" + spaces + "s |", i));
             for (int j = 1; j <= number; j++) {
                 buffer.append(String.format("%" + spaces + "s", (i * j)));
@@ -54,5 +56,11 @@ public class MultiplicationTable {
         }
 
         return buffer.toString();
+    }
+    
+    public static void main(String[] args) {
+        String table = generateMultiplicationTable(30);
+        System.out.println("Multiplecation table for : 30\n");
+        System.out.println(table);
     }
 }
