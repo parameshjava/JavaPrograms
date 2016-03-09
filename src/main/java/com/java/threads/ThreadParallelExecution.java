@@ -31,7 +31,7 @@ public class ThreadParallelExecution {
         return primesTotal;
     }
     
-    public static void sequentialExecution() {
+    public static long sequentialExecution() {
         long startTime = System.currentTimeMillis();
         long sum1 = sumOfPrimes(500000);
         System.out.println("Sume of primes of 500000 : " + sum1);
@@ -40,18 +40,22 @@ public class ThreadParallelExecution {
         System.out.println("Sume of primes of 530000 : " + sum2);
         
         long endTime = System.currentTimeMillis();
-        System.out.println("Sequential Execution time : " + (endTime - startTime));
+        long executionTime = (endTime - startTime);
+        System.out.println("Sequential Execution time : " + executionTime);
+        return executionTime;
     }
     
-    public static void parallelExecution() throws InterruptedException {
+    public static long parallelExecution() throws InterruptedException {
         long startTime = System.currentTimeMillis();
         Thread trd1 = new Thread("My Thread 1") {
+            @Override
             public void run() {
                 long sum = sumOfPrimes(500000);
                 System.out.println("Sume of primes of 500000 : " + sum);
             }
         };
         Thread trd2 = new Thread("My Thread 2") {
+            @Override
             public void run() {
                 long sum = sumOfPrimes(530000);
                 System.out.println("Sume of primes of 530000 : " + sum);
@@ -62,7 +66,9 @@ public class ThreadParallelExecution {
         trd1.join();
         trd2.join();
         long endTime = System.currentTimeMillis();
-        System.out.println("Parellel Execution time : " + (endTime - startTime));
+        long executionTime = (endTime - startTime);
+        System.out.println("Parellel Execution time : " + executionTime);
+        return executionTime;
     }
     public static void main(String[] args) throws InterruptedException {
         sequentialExecution();

@@ -57,10 +57,4 @@ public class MultiplicationTable {
 
         return buffer.toString();
     }
-    
-    public static void main(String[] args) {
-        String table = generateMultiplicationTable(30);
-        System.out.println("Multiplecation table for : 30\n");
-        System.out.println(table);
-    }
 }
