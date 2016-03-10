@@ -1,5 +1,8 @@
 package com.java.calendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Prints the calendar for given given month in a year.
  * 
@@ -7,6 +10,8 @@ package com.java.calendar;
  *
  */
 public class PrintCalendar {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrintCalendar.class);
 
     //Reference for Odd Days : http://www.indiabix.com/aptitude/calendar/formulas
     static String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -118,5 +123,10 @@ public class PrintCalendar {
             }
         }
         return buffer.toString();
+    }
+    
+    public static void main(String[] args) {
+        String calendar = PrintCalendar.getCalender(12, 1990);
+        LOGGER.info("month {}, year {} calender : \n{}", 12, 1990, calendar);
     }
 }

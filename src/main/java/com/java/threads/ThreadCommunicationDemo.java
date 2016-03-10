@@ -6,7 +6,6 @@ public class ThreadCommunicationDemo {
 		ChatApplication ca = new ChatApplication();
 		new CustomerThread(ca).start();
 		new ServiceProviderThread(ca).start();
-
 	}
 
 }
