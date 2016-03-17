@@ -55,7 +55,7 @@ public class MapExample {
             System.out.println(String.format("Key = %s & value = %s", entry.getKey(), entry.getValue()));
         }
     }
-    
+
     public void iterateMapByUsingKeys(Map<String, Integer> map) {
         LOGGER.info("---- Iterating map by using Keys ----");
         Set<String> keys = map.keySet();

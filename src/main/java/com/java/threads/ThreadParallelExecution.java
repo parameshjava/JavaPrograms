@@ -1,7 +1,7 @@
 package com.java.threads;
 
 public class ThreadParallelExecution {
-    
+
     /**
      * Calculates the sum of all prime numbers upto the given range
      * 
@@ -10,13 +10,13 @@ public class ThreadParallelExecution {
      */
     public static long sumOfPrimes(int range) {
         long primesTotal = 3; // 1 + 2
-        
+
         // Since all the even numbers are not prime, we are skipping even numbers
         for (int currentNumber = 3; currentNumber <= range; currentNumber += 2) {
             // Initially assume current number is a prime
             boolean isPrime = true;
             for (int factor = 3; factor <= (currentNumber / 2); factor++) {
-                if(currentNumber % factor == 0) {
+                if (currentNumber % factor == 0) {
                     // Update current number is not a prime, when it has factor
                     isPrime = false;
                     // Since it has a factor and no need to continue the loop
@@ -24,27 +24,27 @@ public class ThreadParallelExecution {
                 }
             }
             // Add current number to the series, when there is no factor available
-            if(isPrime) {
-                primesTotal += currentNumber; 
+            if (isPrime) {
+                primesTotal += currentNumber;
             }
         }
         return primesTotal;
     }
-    
+
     public static long sequentialExecution() {
         long startTime = System.currentTimeMillis();
         long sum1 = sumOfPrimes(500000);
         System.out.println("Sume of primes of 500000 : " + sum1);
-        
+
         long sum2 = sumOfPrimes(530000);
         System.out.println("Sume of primes of 530000 : " + sum2);
-        
+
         long endTime = System.currentTimeMillis();
         long executionTime = (endTime - startTime);
         System.out.println("Sequential Execution time : " + executionTime);
         return executionTime;
     }
-    
+
     public static long parallelExecution() throws InterruptedException {
         long startTime = System.currentTimeMillis();
         Thread trd1 = new Thread("My Thread 1") {
@@ -70,9 +70,10 @@ public class ThreadParallelExecution {
         System.out.println("Parellel Execution time : " + executionTime);
         return executionTime;
     }
+
     public static void main(String[] args) throws InterruptedException {
         sequentialExecution();
         parallelExecution();
     }
-    
+
 }
