@@ -1,56 +1,53 @@
 package com.java.exceptions;
 
-import org.junit.Rule;
+import org.junit.After;
+import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import junit.framework.TestCase;
-
-public class CustomExceptionHandlingTest extends TestCase {
+public class CustomExceptionHandlingTest {
 
     CustomExceptionHandling customException;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
-    @Override
+    @Before
     public void setUp() {
         customException = new CustomExceptionHandling();
     }
 
-    @Test(expected = InvalidCredentialsException.class)
+    @Test
     public void testPerformLoginlankUsername() {
         try {
             customException.validateLogin(null, null);
-        } catch (Exception e) {
+        } catch (InvalidCredentialsException e) {
             assertTrue(e.getMessage().equals("Username should not be blank"));
         }
     }
 
-    @Test(expected = InvalidCredentialsException.class)
+    @Test
     public void testPerformLoginBlankPassword() {
         try {
             customException.validateLogin("Rahul", null);
-        } catch (Exception e) {
+        } catch (InvalidCredentialsException e) {
             assertTrue(e.getMessage().equals("Password should not be blank"));
         }
     }
 
-    @Test(expected = InvalidCredentialsException.class)
+    @Test
     public void testPerformLoginBadUsername() {
         try {
             customException.validateLogin("Rahul", "secret");
-        } catch (Exception e) {
-            assertTrue(e.getMessage().equals("Username not converted as number"));
+        } catch (InvalidCredentialsException e) {
+            //Assert.assertTrue(e.getMessage().equals("Username not converted as number"));
+            assertEquals("Username not converted as number", e.getMessage());
             assertTrue(e.getCause() instanceof NumberFormatException);
         }
     }
 
-    @Test(expected = InvalidCredentialsException.class)
+    @Test
     public void testPerformLoginWrongPassword() {
         try {
             customException.validateLogin("123456", "mywish");
-        } catch (Exception e) {
+        } catch (InvalidCredentialsException e) {
             assertTrue(e.getMessage().equals("Username and password not matched"));
         }
     }
@@ -61,7 +58,7 @@ public class CustomExceptionHandlingTest extends TestCase {
         assertTrue(isSuccess);
     }
 
-    @Override
+    @After
     public void tearDown() {
         customException = null;
     }

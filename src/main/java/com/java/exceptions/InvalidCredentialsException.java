@@ -15,13 +15,6 @@ public class InvalidCredentialsException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     /**
-     * To just throw user defined exception object
-     */
-    public InvalidCredentialsException() {
-        super();
-    }
-
-    /**
      * To throw user defined exception along with brief description of the exception.
      * 
      * @param message

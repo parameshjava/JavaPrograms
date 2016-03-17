@@ -1,6 +1,8 @@
 package com.java.collections;
 
-public class Product {
+import org.apache.commons.lang.StringUtils;
+
+public class Product implements Comparable<Product> {
 
     int id;
 
@@ -18,7 +20,8 @@ public class Product {
     @Override
     public int hashCode() {
         final int prime = 31;
-        int result = prime + ((name == null) ? 0 : name.hashCode());
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
         long temp;
         temp = Double.doubleToLongBits(price);
         result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -27,21 +30,45 @@ public class Product {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Product other = (Product) obj;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
+
+        if (!StringUtils.equals(name, other.name)) {
             return false;
-        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
+        }
+        if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) {
             return false;
+        }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Product [id=").append(id).append(", name=").append(name).append(", price=").append(price)
+                .append("]");
+        return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Product other) {
+        int idCompare = Integer.compare(id, other.id);
+        if (idCompare == 0) {
+            int nameCompare = name.compareTo(other.name);
+            if (nameCompare == 0) {
+                return Double.compare(price, other.price);
+            }
+            return nameCompare;
+        }
+        return idCompare;
     }
 
 }
