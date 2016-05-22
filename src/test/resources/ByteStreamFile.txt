@@ -1,0 +1,2 @@
+This is my first string sending to file by using byte oriented stream.
+This is my second string sending to file by using byte oriented stream.
