@@ -19,7 +19,7 @@ public class DeadLockDemo {
             while (true) {
                 synchronized (str1) {
                     synchronized (str2) {
-                        System.out.println(i++ + ". " + trd1.getName() + " : " + str1 + str2);
+                        System.out.println(String.join("", String.valueOf(i++), ". ", trd1.getName(), " : ", str1, str2));
                     }
                 }
             }
@@ -27,12 +27,14 @@ public class DeadLockDemo {
     };
 
     Thread trd2 = new Thread("My Thread 2") {
+        @Override
         public void run() {
             int i = 1;
             while (true) {
                 synchronized (str2) {
                     synchronized (str1) {
-                        System.out.println(i++ + ". " + trd2.getName() + " : " + str2 + str1);
+                        System.out.println(String.join("", String.valueOf(i++), ". ", trd2.getName(), " : ", str2, str1));
+                        ;
                     }
                 }
             }

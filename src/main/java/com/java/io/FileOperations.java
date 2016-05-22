@@ -28,7 +28,6 @@ public class FileOperations {
     public static Map<String, Integer> listWordsWithOccurance(String filePath) throws FileNotFoundException, IOException {
 
         File file = new File(filePath);
-        // .getAbsoluteFile();
         String inputLine = null;
         Map<String, Integer> wordsMap = new HashMap<>();
 

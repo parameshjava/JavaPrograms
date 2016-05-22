@@ -3,7 +3,7 @@ package com.java.threads;
 public class ChatApplication {
     boolean isQueAsked = false;
 
-    public synchronized void question(String que) {
+    public synchronized void askQuestion(String que) {
         
         if (isQueAsked) {
             try {
@@ -19,7 +19,7 @@ public class ChatApplication {
         notify();
     }
 
-    public synchronized void answer(String ans) {
+    public synchronized void answerQuery(String ans) {
         if (!isQueAsked) {
             try {
                 wait();

@@ -15,7 +15,7 @@ public class ServiceProviderThread extends Thread {
     @Override
     public void run() {
         for (String ans : answers) {
-            ca.answer(ans);
+            ca.answerQuery(ans);
         }
     }
 

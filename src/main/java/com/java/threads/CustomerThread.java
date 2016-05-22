@@ -13,7 +13,7 @@ public class CustomerThread extends Thread {
     @Override
     public void run() {
         for (String que : questions) {
-            ca.question(que);
+            ca.askQuestion(que);
         }
     }
 
