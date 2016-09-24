@@ -61,3 +61,5 @@ CREATE OR REPLACE PROCEDURE performBackup(
     COMMIT;
   END;
 /
+
+-- Added a new table
