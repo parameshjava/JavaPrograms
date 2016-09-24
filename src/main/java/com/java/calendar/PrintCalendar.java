@@ -12,8 +12,9 @@ import org.slf4j.LoggerFactory;
 public class PrintCalendar {
     
     private static final Logger LOGGER = LoggerFactory.getLogger(PrintCalendar.class);
-
-    //Reference for Odd Days : http://www.indiabix.com/aptitude/calendar/formulas
+     
+    //Reference for Odd Days : http://www.indiabix.com/aptitude/calendar/formulas   
+    // This is a new line added to existing code
     static String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
     static int[] monthlyDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
