@@ -14,8 +14,9 @@ public class PrintCalendar {
     private static final Logger LOGGER = LoggerFactory.getLogger(PrintCalendar.class);
 
     //Reference for Odd Days : http://www.indiabix.com/aptitude/calendar/formulas
+    // Collect all the days in a week.
     static String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-
+    // Collect number of days in each month for a normal year.
     static int[] monthlyDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     /**
@@ -71,7 +72,7 @@ public class PrintCalendar {
 
         // For leaf year, odd days = 2 due to Feb. 100th year is not a leaf year but 400th Year is a leaf year
         duration = (isLeapYear(year) && month > 2) ? (duration + 1) : duration;
-
+        // Odd days always lies b/w 0 - 7, hence using %7.
         oddDays = (oddDays + duration + day) % 7;
 
         return oddDays;
@@ -101,7 +102,7 @@ public class PrintCalendar {
      * @return Calendar for the month
      */
     public static String getCalender(int month, int year) {
-
+        // Avoids huge memory utilization while concatenating strings
         StringBuffer buffer = new StringBuffer();
 
         String format = "%" + 4 + "s";
