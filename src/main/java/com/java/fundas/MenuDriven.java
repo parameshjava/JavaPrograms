@@ -112,7 +112,7 @@ public class MenuDriven {
             for (int index = 0; index < array.length - 1; index++) {
                 // Swap the elements, if the first number is less next number in the array
                 if (array[index] < array[index + 1]) {
-                    // Perform swapping
+                    // Perform swapping without using third variable
                     array[index] = array[index] + array[index + 1];
                     array[index + 1] = array[index] - array[index + 1];
                     array[index] = array[index] - array[index + 1];
@@ -131,6 +131,7 @@ public class MenuDriven {
      * @return integer array
      */
     public static int[] convertStringToInt(String[] numbers) {
+    	// Create a new array to hold integers whose length is exactly same as gie string array
         int[] intArr = new int[numbers.length];
         for (int index = 0; index < numbers.length; index++) {
             int number = Integer.parseInt(numbers[index]);
