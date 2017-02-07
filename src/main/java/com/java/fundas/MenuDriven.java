@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  */
 public class MenuDriven {
-    
+
     /**
      * Calculates sum of the elements given array
      * 
@@ -27,7 +27,7 @@ public class MenuDriven {
         }
         return sum;
     }
-    
+
     /**
      * Generates fibonacci series upto the given range
      * 
@@ -40,13 +40,13 @@ public class MenuDriven {
         // In fibonacci series by default first two numbers are 1 & 2
         int firstNumber = 1;
         int secondNumber = 2;
-        
+
         // Adding first two default numbers to the sequence
         builder.append(firstNumber).append(", ").append(secondNumber);
         int nextNumber = 0;
-        
+
         // Generate the sequence upto the given range
-        while(nextNumber <= range) {
+        while (nextNumber <= range) {
             // Calculate the next number in the sequence by adding last two numbers
             nextNumber = firstNumber + secondNumber;
             if (nextNumber <= range) {
@@ -60,7 +60,7 @@ public class MenuDriven {
         // Converts StringBuffer to String and return the series to the client
         return builder.toString();
     }
-    
+
     /**
      * Generates prime numbers upto the given range
      * 
@@ -71,13 +71,13 @@ public class MenuDriven {
         StringBuilder builder = new StringBuilder();
         // By default 2 is prime
         builder.append("2");
-        
+
         // Since all the even numbers are not prime, we are skipping even numbers
         for (int currentNumber = 3; currentNumber <= range; currentNumber = (currentNumber + 2)) {
             // Initially assume current number is a prime
             boolean isPrime = true;
             for (int factor = 3; factor <= (currentNumber / 2); factor++) {
-                if(currentNumber % factor == 0) {
+                if (currentNumber % factor == 0) {
                     // Update current number is not a prime, when it has factor
                     isPrime = false;
                     // Since it has a factor and no need to continue the loop
@@ -85,13 +85,13 @@ public class MenuDriven {
                 }
             }
             // Add current number to the series, when there is no factor available
-            if(isPrime) {
-                builder.append(", ").append(currentNumber); 
+            if (isPrime) {
+                builder.append(", ").append(currentNumber);
             }
         }
         return builder.toString();
     }
-    
+
     /**
      * Sorts the given String array in descending order
      * 
@@ -101,24 +101,25 @@ public class MenuDriven {
     public static int[] sortDescending(String[] numbers) {
         // Since numbers in String format cannot comparable, Convert String to Integer array.
         int[] array = convertStringToInt(numbers);
-        
+
         // Initially always assume that, there is swapping required
         boolean isSwapped = true;
-        
+
         // Continue the operation till there is no sorting required
         while (isSwapped) {
             // Initially make the flag as not swapped
             isSwapped = false;
             for (int index = 0; index < array.length - 1; index++) {
                 // Swap the elements, if the first number is less next number in the array
-                if(array[index] < array[index + 1]) {
-                    int temp = array[index];
-                    array[index] = array[index + 1];
-                    array[index+1] = temp;
+                if (array[index] < array[index + 1]) {
+                    // Perform swapping
+                    array[index] = array[index] + array[index + 1];
+                    array[index + 1] = array[index] - array[index + 1];
+                    array[index] = array[index] - array[index + 1];
                     // Update the flag as swapped
                     isSwapped = true;
                 }
-            } 
+            }
         }
         return array;
     }
@@ -153,32 +154,32 @@ public class MenuDriven {
             choice = sc.nextInt();
 
             switch (choice) {
-            case 1:
-                System.out.println("Please enter the numbers separated by comma to calculate the sum");
-                String[] numbersForSum = sc.next().split(",");
-                int sum = summation(numbersForSum);
-                System.out.println("Sum of given numbers : " + sum);
-                break;
-            case 2:
-                System.out.println("Please enter the range to generate fibonacci series : ");
-                int fibonacciRange = sc.nextInt();
-                String fibonacciSeries = fibonacciSeries(fibonacciRange);
-                System.out.println("Fibonacci series : " + fibonacciSeries);
-                break;
-            case 3:
-                System.out.println("Please enter tha range to generate prime number series : ");
-                int primeRange = sc.nextInt();
-                String primeSeries = primeNumberSeries(primeRange);
-                System.out.println("Prime numbers : " + primeSeries);
-                break;
-            case 4:
-                System.out.println("Please enter the numbers separated by comma to sort in descending order :");
-                String[] numbersForSort = sc.next().split(",");
-                int[] sortedArray = sortDescending(numbersForSort);
-                System.out.println("Desending order sorted Array : " + Arrays.toString(sortedArray));
-                break;
-            default:
-                System.out.println("Not chosen correct option, exiting from the loop");
+                case 1:
+                    System.out.println("Please enter the numbers separated by comma to calculate the sum");
+                    String[] numbersForSum = sc.next().split(",");
+                    int sum = summation(numbersForSum);
+                    System.out.println("Sum of given numbers : " + sum);
+                    break;
+                case 2:
+                    System.out.println("Please enter the range to generate fibonacci series : ");
+                    int fibonacciRange = sc.nextInt();
+                    String fibonacciSeries = fibonacciSeries(fibonacciRange);
+                    System.out.println("Fibonacci series : " + fibonacciSeries);
+                    break;
+                case 3:
+                    System.out.println("Please enter tha range to generate prime number series : ");
+                    int primeRange = sc.nextInt();
+                    String primeSeries = primeNumberSeries(primeRange);
+                    System.out.println("Prime numbers : " + primeSeries);
+                    break;
+                case 4:
+                    System.out.println("Please enter the numbers separated by comma to sort in descending order :");
+                    String[] numbersForSort = sc.next().split(",");
+                    int[] sortedArray = sortDescending(numbersForSort);
+                    System.out.println("Desending order sorted Array : " + Arrays.toString(sortedArray));
+                    break;
+                default:
+                    System.out.println("Not chosen correct option, exiting from the loop");
             }
         } while (choice >= 1 && choice <= 4);
         sc.close();
