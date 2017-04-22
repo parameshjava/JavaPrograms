@@ -20,6 +20,10 @@ public enum Day {
     SATURDAY("SATURDAY", 6, true), 
     SUNDAY("SUNDAY", 7, true);
     
+    
+    
+    
+    
     String name;
     int index;
     boolean isHoliday;

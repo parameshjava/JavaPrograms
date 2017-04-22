@@ -28,6 +28,9 @@ public class PrintCalendar {
      */
     public static String getDay(int day, int month, int year) {
         // Store days in Array
+        
+        
+        
         int oddDays = calculateOddDays(day, month, year);
         return days[oddDays];
 

@@ -16,6 +16,9 @@ public class MapExample {
 
     public Map<String, Integer> poupateMap(Map<String, Integer> map) {
         map.put("English", 88);
+        
+        
+        
         map.put("Kannada", 85);
         map.put("Hindi", 86);
         map.put("Maths", 99);
