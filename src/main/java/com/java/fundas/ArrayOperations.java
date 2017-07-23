@@ -187,21 +187,4 @@ public class ArrayOperations {
         al.add(end);
         return al;
     }
-
-    public static void main(String[] args) {
-        int[] numbers = {50, 30, 10, 5, 20, 80, 90, 12};
-        sort(numbers, false);
-        System.out.println("Array in sorting order : " + Arrays.toString(numbers));
-        sort(numbers, true);
-        System.out.println("Array in sorting order : " + Arrays.toString(numbers));
-
-        int[] numbers2 = {50, 30, 10, 50, 20, 20, 90, 12};
-        System.out.println("Original Array : " + Arrays.toString(numbers2));
-        int[] uniqueArr = removeDuplicates(numbers2);
-        System.out.println("Unique Array : " + Arrays.toString(uniqueArr));
-
-        int[] numbers3 = {-50, 30, 10, 5, 20, 80, -90, 12};
-        ArrayList<Integer> nums = maxSubArraySum(numbers3);
-        System.out.println(nums);
-    }
 }
